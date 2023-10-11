@@ -68,7 +68,7 @@
 
 </div>
 
-  <script src="../../assets/script/tecnologie.js"></script>
+  <script src="../../assets/script/tecnologie.js" type="module"></script>
 
 </body>
 </html>

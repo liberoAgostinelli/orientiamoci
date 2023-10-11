@@ -63,7 +63,7 @@
     <div class="wForm flex" id="wForm">
         <?php //include('../modules/form_azienda.php'); ?>
     </div>
-<script src="../../assets/script/azienda.js"></script>
+<script src="../../assets/script/azienda.js" type="module"></script>
 
 </body>
 </html>

@@ -1,5 +1,9 @@
 "use strict";
 
+import getIdUserLoggato from "./script.js";
+
+const idUserLoggato = await getIdUserLoggato();
+
 const t_body = document.getElementById("t_body");
 
 function createTable() {
@@ -126,7 +130,12 @@ function createForm(titolo, path, method, params = []) {
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
-    let paramsInput = [inputNome.value, inputTipo.value, textArea.value];
+    let paramsInput = [
+      inputNome.value,
+      inputTipo.value,
+      textArea.value,
+      idUserLoggato,
+    ];
     fetch(path, {
       method: method,
       headers: {

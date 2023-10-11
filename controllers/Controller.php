@@ -63,12 +63,12 @@ class Controller{
     }
 
     public function setTecnologia($params){
-        $query = " insert into Tecnologia(nome, tipo, descrizione) values(:nome, :tipo, :descrizione)";
+        $query = " insert into Tecnologia(nome, tipo, descrizione, id_user) values(:nome, :tipo, :descrizione, :id_user)";
         return $this->crud->insert($query, $params);
     }
 
     public function modTecnologie($params){
-        $query = "update Tecnologia set nome=:nome, tipo=:tipo, descrizione=:descrizione where id_tecnologia=:id";
+        $query = "update Tecnologia set nome=:nome, tipo=:tipo, descrizione=:descrizione, id_user=:id_user where id_tecnologia=:id";
         return $this->crud->update($query, $params);
     }
 

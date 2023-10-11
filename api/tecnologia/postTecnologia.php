@@ -18,7 +18,8 @@ if( !$controller->verificaLog($session_id) ){
   $params = [
     ":nome" => $input_data[0],
     ":tipo" => $input_data[1],
-    ":descrizione" => $input_data[2]
+    ":descrizione" => $input_data[2],
+    ":id_user" => $input_data[3],
   ];
   $out = $controller->setTecnologia($params);
   echo json_encode($input_data);

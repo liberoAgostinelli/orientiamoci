@@ -33,3 +33,15 @@ function moreWords(id, maxHeight) {
     txtarea.style.overflow = "auto";
   }
 }
+/**
+ * Funzione che ritorna l'id dell'utente loggato per identificare chi inserisce il record
+ * @returns id_user
+ */
+async function getIdUserLoggato() {
+  let response = await fetch("http://localhost:3000/api/getIdUserloggato.php");
+  let data = await response.json();
+  //console.log("id.." + data.id_user);
+  return data.id_user;
+}
+
+export default getIdUserLoggato;

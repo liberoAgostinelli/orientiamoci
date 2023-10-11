@@ -18,6 +18,7 @@ if( !$controller->verificaLog($session_id) ){
     ":nome" => $input_data[0],
     ":tipo" => $input_data[1],
     ":descrizione" => $input_data[2],
+    ":id_user" => $input_data[3],
     ":id" => $_GET['id']
   ];
   $out = $controller->modTecnologie($params);

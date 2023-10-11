@@ -1,11 +1,13 @@
 "use strict";
 
+import getIdUserLoggato from "./script.js";
+
 const tr = document.getElementById("tr");
 const t_body = document.getElementById("t_body");
 
 let toggle = true; // Toggle che serve per...
 
-let idUserLoggato = null;
+const idUserLoggato = await getIdUserLoggato();
 
 const params = [
   "Ragione Sociale",
@@ -32,13 +34,6 @@ function caricaTr(params) {
   tr.appendChild(document.createElement("th"));
   tr.appendChild(document.createElement("th"));
 }
-
-fetch("http://localhost:3000/api/getIdUserloggato.php")
-  .then((response) => response.json())
-  .then((dati) => {
-    idUserLoggato = dati.id_user;
-    //console.log(idUserLoggato);
-  });
 
 function createTable() {
   fetch("http://localhost:3000/api/azienda/getAziende.php")

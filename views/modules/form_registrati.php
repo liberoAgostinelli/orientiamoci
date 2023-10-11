@@ -3,6 +3,18 @@
         <span>Registrati</span>
     </div>
     <div class="wInput">
+        <input type="text" name="nome" placeholder="Nome">
+    </div>
+    <div class="wInput">
+        <input type="text" name="cognome" placeholder="Cognome">
+    </div>
+    <div class="wInput">
+        <input type="date" name="date" >
+    </div>
+    <div class="wInput">
+        <input type="text" name="numero_tel" placeholder="N. tel">
+    </div>
+    <div class="wInput">
         <input type="text" name="username" placeholder="Username">
     </div>
     <div class="wInput">

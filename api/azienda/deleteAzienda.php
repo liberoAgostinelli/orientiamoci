@@ -16,10 +16,14 @@ if( !$controller->verificaLog($session_id) ){
   $id = json_decode(file_get_contents('php://input'), true);
   $method = $_SERVER['REQUEST_METHOD'];
   if($method === "DELETE"){
-    $controller->deleteTecnologia([":id" => $id]);
+    $controller->deleteAzienda([":id" => $id]);
     echo json_encode("delete elem with id = ". $id);
   }
     
 }
 
+  //echo $_SERVER["REQUEST_URI"];
+
+  
+  //exit;
 ?>

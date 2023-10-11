@@ -34,8 +34,8 @@
 <div class="wrapTable">
 <table class='styled-table'>
     <thead>
-      <tr>
-        <th>Ragione Sociale</th>
+      <tr id="tr">
+        <!-- <th>Ragione Sociale</th>
         <th>P. iva</th>
         <th>N. dipendenti</th>
         <th>N. tel</th>
@@ -44,9 +44,8 @@
         <th>Referente</th>
         <th>Ambito</th>
         <th>Note</th>
-        <th>Descrizione</th>
-        <th></th>
-        <th></th>
+        <th>Descrizione</th> -->
+        
       </tr>
     </thead>
     <tbody id="t_body">

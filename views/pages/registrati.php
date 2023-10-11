@@ -2,6 +2,7 @@
     session_start();
     require_once('../../models/Crud.php');
     require_once('../../controllers/Controller.php');
+    require_once('../../assets/function/funzioni.php');
 
     $controller = new Controller();
 
@@ -9,6 +10,9 @@
     // echo $session_id;
 
     $result = $controller->verificaLog($session_id);
+
+    $token = generaStringaRandom(10, $_POST);
+    
     
     if($result){
         //..sono loggato
@@ -19,6 +23,11 @@
         if( isset($_POST['username']) ){
 
             $params = [
+                ':nome' => $_POST['nome'],
+                ':cognome' => $_POST['cognome'],
+                ':date' => $_POST['date'],
+                ':numero_tel' => $_POST['numero_tel'],
+                ':token' => $token,
                 ':username' => $_POST['username'],
                 ':email' => $_POST['email'],
                 ':password' => password_hash($_POST['pwd'], PASSWORD_DEFAULT)

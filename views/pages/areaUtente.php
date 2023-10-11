@@ -11,14 +11,7 @@
         exit;
     }
     
-    //$username = $controller->getNomeUtente($session_id);
-
-    //var_dump($username);
-    // $user_id = $user_id['user_id'];
-    // $query = "select username from User where id = :id";
-    // $params = [':id' => $user_id];
-    // $username = $crud->select($query, $params);
-    // $username = $username['username'];
+    
 
 ?>
 

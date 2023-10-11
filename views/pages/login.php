@@ -16,10 +16,10 @@ if( $controller->verificaLog($session_id) ){
         $username = $_POST['username'];
         $pass = $_POST['pwd'];
         if( $result = $controller->verificaUsername($username) ){
-            
+            print_r($result);
             if( password_verify($pass, $result['password']) ){
                 echo "Password verificata";
-                $params = [':session_id' =>  $session_id, ':user_id' => $result['id']];
+                $params = [':session_id' =>  $session_id, ':id_user' => $result['id_user']];
                 $controller->login($params);
                 if($result){
                     header('location: areaUtente.php');

@@ -14,7 +14,6 @@ if( !$controller->verificaLog($session_id) ){
 }else{
   header('Content-Type: application/json');
   $input_data = json_decode(file_get_contents('php://input'), true);
-
   $params = [
     ":ragione_sociale" => $input_data[0],
     ":p_iva" => $input_data[1],
@@ -29,10 +28,11 @@ if( !$controller->verificaLog($session_id) ){
     ":note" => $input_data[10],
     ":descrizione" => $input_data[11],
     ":ambito" => $input_data[12],
-    ":id_user" => $input_data[13]
+    ":id_user" => $input_data[13],
+    ":id" => $_GET['id']
   ];
-  $out = $controller->setAzienda($params);
-  echo json_encode($input_data);
+  $out = $controller->modAzienda($params);
+  echo json_encode($out);
 }
 
 ?>

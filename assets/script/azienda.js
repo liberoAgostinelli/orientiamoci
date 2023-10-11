@@ -1,31 +1,69 @@
 "use strict";
 
+const tr = document.getElementById("tr");
 const t_body = document.getElementById("t_body");
+
+let toggle = true; // Toggle che serve per...
+
+let idUserLoggato = null;
+
+const params = [
+  "Ragione Sociale",
+  "P. iva",
+  "N. dipendenti",
+  "N. tel",
+  "Email",
+  "Indirizzo",
+  "Comune",
+  "Provincia",
+  "Regione",
+  "Referente",
+  "Ambito",
+  "Note",
+  "Descrizione",
+];
+
+function caricaTr(params) {
+  for (let i = 0; i < params.length; i++) {
+    const th = document.createElement("th");
+    th.innerText = params[i];
+    tr.appendChild(th);
+  }
+  tr.appendChild(document.createElement("th"));
+  tr.appendChild(document.createElement("th"));
+}
+
+fetch("http://localhost:3000/api/getIdUserloggato.php")
+  .then((response) => response.json())
+  .then((dati) => {
+    idUserLoggato = dati.id_user;
+    //console.log(idUserLoggato);
+  });
 
 function createTable() {
   fetch("http://localhost:3000/api/azienda/getAziende.php")
     .then((response) => response.json())
     .then((data) => {
-      console.log(data.length);
+      //console.log(data);
       for (let i = 0; i < data.length; i++) {
         const tr = document.createElement("tr");
         const tdBtnMod = document.createElement("td");
         const btnMod = document.createElement("button");
         btnMod.innerText = "Modifica";
-        btnMod.setAttribute("id", data[i].id_tecnologia);
+        btnMod.setAttribute("id", data[i].id_azienda);
         btnMod.classList.add("btn");
         btnMod.classList.add("btn_mod");
         btnMod.addEventListener("click", (e) => {
-          console.log(e.target.id);
+          //console.log(e.target.id);
           let id = e.target.id;
-          let arrTech = getTecnologia(e.target.id);
-          modForm(id, arrTech);
+          let valuesAzienda = getAzienda(e.target.id);
+          modForm(id, valuesAzienda);
         });
         tdBtnMod.appendChild(btnMod);
         const tdBtnCanc = document.createElement("td");
         const btnCanc = document.createElement("button");
         btnCanc.innerText = "Cancella";
-        btnCanc.setAttribute("id", data[i].id_tecnologia);
+        btnCanc.setAttribute("id", data[i].id_azienda);
         btnCanc.classList.add("btn");
         btnCanc.classList.add("btn_canc");
         btnCanc.addEventListener("click", (e) => {
@@ -35,12 +73,12 @@ function createTable() {
           createTable(); // Ricostruisce l'intera tabella
         });
         tdBtnCanc.appendChild(btnCanc);
-        for (let j = 0; j < 10; j++) {
+        for (let j = 0; j < 13; j++) {
           const td = document.createElement("td");
-          td.innerText = data[i][j];
+          td.innerText = data[i][j + 1];
           tdBtnMod.appendChild(btnMod);
           tr.appendChild(td);
-          //console.log(data[i][j]);
+          console.log(data[i][j]);
         }
         tr.appendChild(tdBtnMod);
         tr.appendChild(tdBtnCanc);
@@ -57,7 +95,7 @@ function deleteTable() {
 }
 
 function deleteElem(id) {
-  fetch("http://localhost:3000/api/tecnologia/deleteTecnologia.php", {
+  fetch("http://localhost:3000/api/azienda/deleteAzienda.php", {
     method: "DELETE",
     body: JSON.stringify(id),
   })
@@ -67,22 +105,7 @@ function deleteElem(id) {
 
 const wForm = document.getElementById("wForm");
 
-let toggle = true;
-
-const params = [
-  "Ragione Sociale",
-  "P. iva",
-  "N. dipendenti",
-  "N. tel",
-  "Email",
-  "Indirizzo",
-  "Referente",
-  "Ambito",
-  "Note",
-  "Descrizione",
-];
-
-function createForm(titolo, path, method, params = [], value = []) {
+function createForm(titolo, path, method, params = [], values = []) {
   const form = document.createElement("form");
   form.setAttribute("method", method);
   form.setAttribute("action", path);
@@ -103,7 +126,8 @@ function createForm(titolo, path, method, params = [], value = []) {
   divTitolo.appendChild(span);
   form.appendChild(divTitolo);
 
-  for (let i = 0; i < 8; i++) {
+  const arrInput = [];
+  for (let i = 0; i < 11; i++) {
     const div = document.createElement("div");
     div.classList.add("wInput");
     const input = document.createElement("input");
@@ -114,16 +138,18 @@ function createForm(titolo, path, method, params = [], value = []) {
     }
 
     input.setAttribute("placeholder", params[i]);
-    if (value.length !== 0) input.value = value[i];
+    if (values.length !== 0) input.value = values[i];
     div.appendChild(input);
     form.appendChild(div);
+    arrInput.push(input);
   }
 
   const divTextAreaNote = document.createElement("div");
   divTextAreaNote.classList.add("wInput");
   const textAreaNote = document.createElement("textarea");
   textAreaNote.setAttribute("placeholder", "Note");
-  if (value.length !== 0) textAreaNote.value = params[8];
+  if (values.length !== 0) textAreaNote.value = values[11];
+  arrInput.push(textAreaNote);
 
   divTextAreaNote.appendChild(textAreaNote);
   form.appendChild(divTextAreaNote);
@@ -132,7 +158,8 @@ function createForm(titolo, path, method, params = [], value = []) {
   divTextAreaDesc.classList.add("wInput");
   const textAreadesc = document.createElement("textarea");
   textAreadesc.setAttribute("placeholder", "Descrizione");
-  if (value.length !== 0) textAreadesc.value = params[9];
+  if (values.length !== 0) textAreadesc.value = values[12];
+  arrInput.push(textAreadesc);
 
   divTextAreaDesc.appendChild(textAreadesc);
   form.appendChild(divTextAreaDesc);
@@ -147,9 +174,13 @@ function createForm(titolo, path, method, params = [], value = []) {
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
-    let dati = new FormData(form);
-    console.log(dati);
-    let paramsInput = [inputNome.value, inputTipo.value, textArea.value];
+    //console.log(dati);
+    const paramsInput = [];
+    for (let i = 0; i < arrInput.length; i++) {
+      paramsInput.push(arrInput[i].value);
+    }
+    paramsInput.push(idUserLoggato);
+    console.log("Pi: " + paramsInput);
     fetch(path, {
       method: method,
       headers: {
@@ -188,14 +219,15 @@ function deleteForm() {
   }
 }
 
-function modForm(id, params) {
-  console.log(params);
+function modForm(id, values) {
+  //console.log(values);
   wForm.innerHTML = "";
   createForm(
-    "Modifica Tecnologia ID " + id,
-    "http://localhost:3000/api/tecnologia/modTecnologia.php?id=" + id,
+    "Modifica Azienda ID " + id,
+    "http://localhost:3000/api/azienda/modAzienda.php?id=" + id,
     "POST",
-    params
+    params,
+    values
   );
 }
 
@@ -210,14 +242,18 @@ btn_add.addEventListener("click", () => {
     );
 });
 
-function getTecnologia(id) {
-  fetch("http://localhost:3000/api/tecnologia/getTecnologia.php?id=" + id)
+function getAzienda(id) {
+  fetch("http://localhost:3000/api/azienda/getAzienda.php?id=" + id)
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
-      let arr = [data[1], data[2], data[3]];
-      modForm(data[0], arr);
+      let values = [];
+      for (let i = 0; i < 14; i++) {
+        values.push(data[i + 1]);
+      }
+      console.log("values getAzienda: " + values);
+      modForm(data[0], values);
     });
 }
-
+caricaTr(params);
 createTable(); // Richiesta campi tabella e creazione tabella

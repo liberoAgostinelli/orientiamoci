@@ -5,10 +5,6 @@
                 <a href="../pages/home.php" class="flex">Home</a>
             </li>
             <li class="flex">
-                <a href="../pages/registrati.php" class="flex">Registrati</a>
-            </li>
-            
-            <li class="flex">
                 <a href="../pages/login.php" class="flex">Login</a>
             </li>
         </ul>

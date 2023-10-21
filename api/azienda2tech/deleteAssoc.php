@@ -8,16 +8,19 @@ require_once('../../controllers/Controller.php');
 $controller = new Controller();
 $session_id = session_id();
 
+$id_azienda = $_GET['id_azienda'];
+$id_tecnologia = $_GET['id_tecnologia'];
+
 if( !$controller->verificaLog($session_id) ){
     //header('location: home.php');
     exit;
 }else{
   header('Content-Type: application/json');
-  $id = json_decode(file_get_contents('php://input'), true);
+  $input = json_decode(file_get_contents('php://input'), true);
   $method = $_SERVER['REQUEST_METHOD'];
   if($method === "DELETE"){
-    $controller->deleteAzienda([":id" => $id]);
-    echo json_encode("delete elem with id = ". $id);
+    $controller->deleteAssocAzienda([":id_azienda" => $id_azienda, ":id_tecnologia" => $id_tecnologia]);
+    echo json_encode("delete elem with id_azienda = ". $id_azienda . " id_tecnologia = " . $id_tecnologia);
   }
     
 }

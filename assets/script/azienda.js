@@ -4,12 +4,14 @@ import getIdUserLoggato from "./script.js";
 
 const tr = document.getElementById("tr");
 const t_body = document.getElementById("t_body");
+const wForm = document.getElementById("wForm");
 
 let toggle = true; // Toggle che serve per...
 
 const idUserLoggato = await getIdUserLoggato();
 
 const params = [
+  "ID",
   "Ragione Sociale",
   "P. iva",
   "N. dipendenti",
@@ -23,6 +25,7 @@ const params = [
   "Ambito",
   "Note",
   "Descrizione",
+  "Id_user",
 ];
 
 function caricaTr(params) {
@@ -62,19 +65,20 @@ function createTable() {
         btnCanc.classList.add("btn");
         btnCanc.classList.add("btn_canc");
         btnCanc.addEventListener("click", (e) => {
-          console.log(e.target.id);
+          //console.log(e.target.id);
           deleteElem(e.target.id);
           deleteTable(); // Cancella intera tabella
           createTable(); // Ricostruisce l'intera tabella
         });
         tdBtnCanc.appendChild(btnCanc);
-        for (let j = 0; j < 13; j++) {
+        //console.log(data[i]);
+
+        Object.keys(data[i]).forEach((key) => {
           const td = document.createElement("td");
-          td.innerText = data[i][j + 1];
-          tdBtnMod.appendChild(btnMod);
+          td.innerText = data[i][key];
           tr.appendChild(td);
-          console.log(data[i][j]);
-        }
+        });
+
         tr.appendChild(tdBtnMod);
         tr.appendChild(tdBtnCanc);
         t_body.appendChild(tr);
@@ -98,9 +102,10 @@ function deleteElem(id) {
     .then((data) => console.log(data));
 }
 
-const wForm = document.getElementById("wForm");
-
 function createForm(titolo, path, method, params = [], values = []) {
+  const prs = [...params];
+  prs.shift();
+  //console.log(prs);
   const form = document.createElement("form");
   form.setAttribute("method", method);
   form.setAttribute("action", path);
@@ -126,13 +131,13 @@ function createForm(titolo, path, method, params = [], values = []) {
     const div = document.createElement("div");
     div.classList.add("wInput");
     const input = document.createElement("input");
-    if (params[i] === "Email") {
+    if (prs[i] === "Email") {
       input.setAttribute("type", "email");
     } else {
       input.setAttribute("type", "text");
     }
 
-    input.setAttribute("placeholder", params[i]);
+    input.setAttribute("placeholder", prs[i]);
     if (values.length !== 0) input.value = values[i];
     div.appendChild(input);
     form.appendChild(div);
@@ -175,7 +180,7 @@ function createForm(titolo, path, method, params = [], values = []) {
       paramsInput.push(arrInput[i].value);
     }
     paramsInput.push(idUserLoggato);
-    console.log("Pi: " + paramsInput);
+    //console.log("Pi: " + paramsInput);
     fetch(path, {
       method: method,
       headers: {
@@ -243,11 +248,11 @@ function getAzienda(id) {
     .then((data) => {
       console.log(data);
       let values = [];
-      for (let i = 0; i < 14; i++) {
-        values.push(data[i + 1]);
-      }
-      console.log("values getAzienda: " + values);
-      modForm(data[0], values);
+      Object.keys(data).forEach((key) => {
+        values.push(data[key]);
+      });
+      values.shift();
+      modForm(data.id_azienda, values);
     });
 }
 caricaTr(params);

@@ -11,7 +11,13 @@
                 <a href="../pages/tecnologie.php" class="flex">Tecnologie</a>
             </li>
             <li class="flex">
+                <a href="../pages/azienda2tech.php" class="flex">Azienda2Tech</a>
+            </li>
+            <li class="flex">
                 <a href="../pages/areaUtente.php" class="flex">Area Utente</a>
+            </li>
+            <li class="flex">
+                <a href="../pages/registrati.php" class="flex">Registrata Utente</a>
             </li>
             <li class="flex">
                 <a href="../pages/logout.php" class="flex">Logout</a>

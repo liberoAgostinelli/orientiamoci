@@ -16,6 +16,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../assets/style/style.css">
+    <link rel="stylesheet" href="../../assets/style/style_nav/style_nav.css">
     <title>Azienda</title>
 </head>
 <body>
@@ -35,16 +36,6 @@
 <table class='styled-table'>
     <thead>
       <tr id="tr">
-        <!-- <th>Ragione Sociale</th>
-        <th>P. iva</th>
-        <th>N. dipendenti</th>
-        <th>N. tel</th>
-        <th>Email</th>
-        <th>indirizzo</th>
-        <th>Referente</th>
-        <th>Ambito</th>
-        <th>Note</th>
-        <th>Descrizione</th> -->
         
       </tr>
     </thead>
@@ -61,7 +52,7 @@
 </div>
 
     <div class="wForm flex" id="wForm">
-        <?php //include('../modules/form_azienda.php'); ?>
+        
     </div>
 <script src="../../assets/script/azienda.js" type="module"></script>
 

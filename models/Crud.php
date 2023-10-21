@@ -16,7 +16,7 @@ class Crud{
         //     $st->bindParam($i + 1, $params[$i]);
         // }
         $st->execute($params);
-        return $st->fetch();
+        return $st->fetch(PDO::FETCH_ASSOC);
     }
 
     public function selectAll($query, $params = []){
@@ -25,7 +25,7 @@ class Crud{
         //     $st->bindParam($i + 1, $params[$i]);
         // }
         $st->execute($params);
-        return $st->fetchAll();
+        return $st->fetchAll(PDO::FETCH_ASSOC);
     }
     
     public function insert($query, $params){

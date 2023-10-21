@@ -150,5 +150,23 @@ class Controller{
         where id_azienda=:id";
         return $this->crud->update($query, $params);
     }
+    /**
+     * Funzioni Azienda usa tech
+     */
+
+    public function getAziende_usa_tech($params){
+        $query = "select * from Azienda_usa_tech where id_azienda=:id";
+        return $this->crud->selectAll($query, $params);
+    }
+
+    public function deleteAssocAzienda($params){
+        $query = "delete from Azienda_usa_tech where id_azienda=:id_azienda && id_tecnologia=:id_tecnologia";
+        return $this->crud->select($query, $params);
+    }
+
+    public function getAziende_usa_techFull($params){
+        $query = "select nome, tipo, descrizione, at.id_azienda, at.id_tecnologia from Azienda_usa_tech at, Tecnologia t where at.id_azienda=:id  && at.id_tecnologia = t.id_tecnologia";
+        return $this->crud->selectAll($query, $params);
+    }
 }
 ?>

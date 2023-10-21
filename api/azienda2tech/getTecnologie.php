@@ -8,18 +8,17 @@ require_once('../../controllers/Controller.php');
 $controller = new Controller();
 $session_id = session_id();
 
+$id = $_GET['id'];
+
 if( !$controller->verificaLog($session_id) ){
     //header('location: home.php');
     exit;
 }else{
   header('Content-Type: application/json');
-  $id = json_decode(file_get_contents('php://input'), true);
-  $method = $_SERVER['REQUEST_METHOD'];
-  if($method === "DELETE"){
-    $controller->deleteAzienda([":id" => $id]);
-    echo json_encode("delete elem with id = ". $id);
-  }
-    
-}
+  //$input_data = json_decode(file_get_contents('php://input'), true);
 
+    $out = $controller->getAziende_usa_techFull([":id" => $id]);
+    echo json_encode($out);
+  
+}
 ?>

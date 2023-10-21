@@ -1,6 +1,7 @@
 * {
   margin: 0;
   padding: 0;
+  font-family: sans-serif;
 }
 
 .wForm {
@@ -15,41 +16,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.nav1 {
-  background-color: #009879;
-  height: 50px;
-  justify-content: space-between;
-}
-.nav1 span {
-  margin-left: 20px;
-}
-.nav1 span a {
-  text-decoration: none;
-  cursor: pointer;
-  color: white;
-}
-.nav1 ul {
-  height: 100%;
-  width: 40%;
-}
-.nav1 ul li {
-  list-style: none;
-  width: 18%;
-  height: 100%;
-}
-.nav1 ul li:hover {
-  background-color: #56b8a4;
-}
-.nav1 ul li a {
-  padding: 10px;
-  width: 100%;
-  height: 100%;
-  text-decoration: none;
-  font-weight: 600;
-  cursor: pointer;
-  color: white;
 }
 
 .form {
@@ -150,7 +116,7 @@
   font-size: 0.9em;
   font-family: sans-serif;
   min-width: 600px;
-  max-width: 1000px;
+  max-width: 1200px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 

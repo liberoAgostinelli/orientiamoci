@@ -9,13 +9,12 @@
     $session_id = session_id();
     // echo $session_id;
 
-    $result = $controller->verificaLog($session_id);
+    //$result = $controller->verificaLog($session_id);
 
     $token = generaStringaRandom(10, $_POST);
     
     
-    if($result){
-        //..sono loggato
+    if( !$controller->verificaLog($session_id) ){
         header('location: areaUtente.php');
         exit;
     }else{
@@ -52,10 +51,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" href="../../assets/style/style.css">
+    <link rel="stylesheet" href="../../assets/style/style_nav/style_nav.css">
     <title>Registrati</title>
 </head>
 <body>
-    <?php require_once('../modules/navbarLogin.php');?>
+<?php 
+    
+    if( $controller->verificaLog($session_id) ){
+        require_once('../modules/navbarLogout.php');
+    }
+    else {
+        //$controller->cancellaUtentiLoggati();
+        require_once('../modules/navbarLogin.php');
+    }
+?>
 
     <div class="wForm flex">
         <?php require_once('../modules/form_registrati.php'); ?>

@@ -10,7 +10,7 @@ function createTable() {
   fetch("http://localhost:3000/api/tecnologia/getTecnologie.php")
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
+      //console.log(data);
       for (let i = 0; i < data.length; i++) {
         const tr = document.createElement("tr");
         const tdBtnMod = document.createElement("td");
@@ -39,13 +39,19 @@ function createTable() {
           createTable(); // Ricostruisce l'intera tabella
         });
         tdBtnCanc.appendChild(btnCanc);
-        for (let j = 0; j < 4; j++) {
+
+        Object.keys(data[i]).forEach((key) => {
           const td = document.createElement("td");
-          td.innerText = data[i][j];
-          tdBtnMod.appendChild(btnMod);
+          td.innerText = data[i][key];
           tr.appendChild(td);
-          //console.log(data[i][j]);
-        }
+        });
+        // for (let j = 0; j < 5; j++) {
+        //   const td = document.createElement("td");
+        //   td.innerText = data[i][j];
+        //   tdBtnMod.appendChild(btnMod);
+        //   tr.appendChild(td);
+        //   //console.log(data[i][j]);
+        // }
         tr.appendChild(tdBtnMod);
         tr.appendChild(tdBtnCanc);
         t_body.appendChild(tr);
@@ -201,8 +207,12 @@ function getTecnologia(id) {
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
-      let arr = [data[1], data[2], data[3]];
-      modForm(data[0], arr);
+      let values = [];
+      Object.keys(data).forEach((key) => {
+        values.push(data[key]);
+      });
+      values.shift();
+      modForm(data.id_tecnologia, values);
     });
 }
 

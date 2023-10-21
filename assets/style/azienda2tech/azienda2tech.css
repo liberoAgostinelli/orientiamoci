@@ -1,0 +1,48 @@
+.wrap_page .wrap_azienda {
+  flex-direction: column;
+}
+.wrap_page .wrap_azienda .content_azienda {
+  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.2);
+  width: 400px;
+  margin: 40px;
+  padding: 20px;
+  border-top: 6px solid #009879;
+  border-bottom: 2px solid #009879;
+}
+.wrap_page .wrap_azienda .content_azienda .field {
+  margin: 4px;
+  background-color: #009879;
+}
+.wrap_page .wrap_azienda .content_azienda .field .span_colum {
+  padding: 5px;
+  font-weight: 600;
+  width: 100%;
+  min-height: 100%;
+  color: white;
+}
+.wrap_page .wrap_azienda .content_azienda .field .span_field {
+  padding: 5px 8px;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(202, 200, 200);
+}
+.wrap_page .wrap_azienda .div_tech_assoc {
+  margin: 40px;
+  width: 70%;
+  height: 100%;
+  flex-wrap: wrap;
+  overflow: auto;
+}
+.wrap_page .wrap_azienda .div_tech_assoc .div_tech {
+  box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.2);
+  border-top: 6px solid #009879;
+  border-bottom: 2px solid #009879;
+  flex-direction: column;
+  width: 240px;
+  min-height: 200px;
+  padding: 10px;
+  margin: 10px;
+}
+.wrap_page .wrap_azienda .div_tech_assoc .div_tech span {
+  margin: 5px;
+}/*# sourceMappingURL=azienda2tech.css.map */

@@ -45,13 +45,7 @@ function createTable() {
           td.innerText = data[i][key];
           tr.appendChild(td);
         });
-        // for (let j = 0; j < 5; j++) {
-        //   const td = document.createElement("td");
-        //   td.innerText = data[i][j];
-        //   tdBtnMod.appendChild(btnMod);
-        //   tr.appendChild(td);
-        //   //console.log(data[i][j]);
-        // }
+
         tr.appendChild(tdBtnMod);
         tr.appendChild(tdBtnCanc);
         t_body.appendChild(tr);

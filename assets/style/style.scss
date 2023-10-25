@@ -171,14 +171,15 @@ a {
   #wrap_btn_add {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: center;
     min-width: 600px;
     max-width: 1000px;
     height: 30px;
     #btn_add {
-      width: 50px;
-      height: 26px;
+      width: 160px;
+      height: 40px;
       background-color: rgb(60, 142, 241);
+      font-weight: 600;
     }
   }
 }

@@ -62,7 +62,7 @@
 
 <div id="div_add">
   <div id="wrap_btn_add">
-    <button id="btn_add" class="btn">Add</button>
+    <button id="btn_add" class="btn">Aggiungi</button>
   </div>
 </div>
   

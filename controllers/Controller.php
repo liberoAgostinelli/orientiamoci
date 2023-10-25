@@ -168,5 +168,10 @@ class Controller{
         $query = "select nome, tipo, descrizione, at.id_azienda, at.id_tecnologia from Azienda_usa_tech at, Tecnologia t where at.id_azienda=:id  && at.id_tecnologia = t.id_tecnologia";
         return $this->crud->selectAll($query, $params);
     }
+
+    public function setAzienda2tech($params){
+        $query = " insert into Azienda_usa_tech(id_azienda, id_tecnologia, id_user) values(:id_azienda, :id_tecnologia, :id_user)";
+        return $this->crud->insert($query, $params);
+    }
 }
 ?>

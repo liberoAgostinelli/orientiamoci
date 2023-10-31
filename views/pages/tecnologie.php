@@ -70,7 +70,8 @@
 
 </div>
 
-  <script src="../../assets/script/tecnologie.js" type="module"></script>
+<script type="module" src="../../assets/script/myFunction.js"></script>r
+<script src="../../assets/script/tecnologie.js" type="module"></script>
 
 </body>
 </html>

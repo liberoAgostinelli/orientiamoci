@@ -2,12 +2,14 @@
 
 import getIdUserLoggato from "./script.js";
 
+import { dominio } from "./myFunction.js";
+
 const idUserLoggato = await getIdUserLoggato();
 
 const t_body = document.getElementById("t_body");
 
 function createTable() {
-  fetch("http://localhost:3000/api/tecnologia/getTecnologie.php")
+  fetch(dominio + "/api/tecnologia/getTecnologie.php")
     .then((response) => response.json())
     .then((data) => {
       //console.log(data);
@@ -61,7 +63,7 @@ function deleteTable() {
 }
 
 function deleteElem(id) {
-  fetch("http://localhost:3000/api/tecnologia/deleteTecnologia.php", {
+  fetch(dominio + "/api/tecnologia/deleteTecnologia.php", {
     method: "DELETE",
     body: JSON.stringify(id),
   })
@@ -160,7 +162,7 @@ function createForm(titolo, path, method, params = []) {
 function resetForm() {
   createForm(
     "Aggiungi Tecnologia",
-    "http://localhost:3000/api/tecnologia/postTecnologia.php",
+    dominio + "/api/tecnologia/postTecnologia.php",
     "POST",
     ["", "", ""]
   );
@@ -179,7 +181,7 @@ function modForm(id, params) {
   wForm.innerHTML = "";
   createForm(
     "Modifica Tecnologia ID " + id,
-    "http://localhost:3000/api/tecnologia/modTecnologia.php?id=" + id,
+    dominio + "/api/tecnologia/modTecnologia.php?id=" + id,
     "POST",
     params
   );
@@ -190,14 +192,14 @@ btn_add.addEventListener("click", () => {
   if (toggle === true)
     createForm(
       "Aggiungi Tecnologia",
-      "http://localhost:3000/api/tecnologia/postTecnologia.php",
+      dominio + "/api/tecnologia/postTecnologia.php",
       "POST",
       ["", "", ""]
     );
 });
 
 function getTecnologia(id) {
-  fetch("http://localhost:3000/api/tecnologia/getTecnologia.php?id=" + id)
+  fetch(dominio + "/api/tecnologia/getTecnologia.php?id=" + id)
     .then((response) => response.json())
     .then((data) => {
       console.log(data);

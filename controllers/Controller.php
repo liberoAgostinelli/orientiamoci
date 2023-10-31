@@ -16,16 +16,16 @@ class Controller{
     }
 
     public function login($params){
-        $query = "insert into UtentiLoggati2(session_id, id_user) values(:session_id, :id_user)";
+        $query = "insert into UtentiLoggati(session_id, id_user) values(:session_id, :id_user)";
         return $this->crud->insert($query, $params);
     }
 
     public function logout($session_id){
-        return $this->crud->delete("UtentiLoggati2", "session_id = :session_id", [':session_id' => $session_id]);
+        return $this->crud->delete("UtentiLoggati", "session_id = :session_id", [':session_id' => $session_id]);
     }
 
     public function verificaLog($session_id){
-        $query = "select * from UtentiLoggati2 where session_id = :session_id";
+        $query = "select * from UtentiLoggati where session_id = :session_id";
         $params = [':session_id' => $session_id];
         return  $this->crud->select($query, $params);
     }
@@ -37,7 +37,7 @@ class Controller{
     }
 
     public function getIdUserLoggato($session_id){
-        $query = "select id_user from UtentiLoggati2 where session_id=:session_id";
+        $query = "select id_user from UtentiLoggati where session_id=:session_id";
         $params = [':session_id' => $session_id];
         $user_id = $this->crud->select($query, $params);
         
@@ -46,7 +46,7 @@ class Controller{
     }
 
     public function cancellaUtentiLoggati(){
-        $query = "delete from UtentiLoggati2";
+        $query = "delete from UtentiLoggati";
         $this->crud->select($query);
     }
     /**

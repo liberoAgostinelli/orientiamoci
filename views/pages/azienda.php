@@ -54,6 +54,8 @@
     <div class="wForm flex" id="wForm">
         
     </div>
+
+<script type="module" src="../../assets/script/myFunction.js"></script>
 <script src="../../assets/script/azienda.js" type="module"></script>
 
 </body>

@@ -2,6 +2,8 @@
 
 import getIdUserLoggato from "./script.js";
 
+import { dominio } from "./myFunction.js";
+
 const tr = document.getElementById("tr");
 const t_body = document.getElementById("t_body");
 const wForm = document.getElementById("wForm");
@@ -39,7 +41,7 @@ function caricaTr(params) {
 }
 
 function createTable() {
-  fetch("http://localhost:3000/api/azienda/getAziende.php")
+  fetch(dominio + "/api/azienda/getAziende.php")
     .then((response) => response.json())
     .then((data) => {
       //console.log(data);
@@ -94,7 +96,7 @@ function deleteTable() {
 }
 
 function deleteElem(id) {
-  fetch("http://localhost:3000/api/azienda/deleteAzienda.php", {
+  fetch(dominio + "/api/azienda/deleteAzienda.php", {
     method: "DELETE",
     body: JSON.stringify(id),
   })
@@ -205,7 +207,7 @@ function createForm(titolo, path, method, params = [], values = []) {
 function resetForm() {
   createForm(
     "Aggiungi Azienda",
-    "http://localhost:3000/api/azienda/postAzienda.php",
+    dominio + "/api/azienda/postAzienda.php",
     "POST",
     params
   );
@@ -224,7 +226,7 @@ function modForm(id, values) {
   wForm.innerHTML = "";
   createForm(
     "Modifica Azienda ID " + id,
-    "http://localhost:3000/api/azienda/modAzienda.php?id=" + id,
+    dominio + "/api/azienda/modAzienda.php?id=" + id,
     "POST",
     params,
     values
@@ -236,14 +238,14 @@ btn_add.addEventListener("click", () => {
   if (toggle === true)
     createForm(
       "Aggiungi Azienda",
-      "http://localhost:3000/api/azienda/postAzienda.php",
+      dominio + "/api/azienda/postAzienda.php",
       "POST",
       params
     );
 });
 
 function getAzienda(id) {
-  fetch("http://localhost:3000/api/azienda/getAzienda.php?id=" + id)
+  fetch(dominio + "/api/azienda/getAzienda.php?id=" + id)
     .then((response) => response.json())
     .then((data) => {
       console.log(data);

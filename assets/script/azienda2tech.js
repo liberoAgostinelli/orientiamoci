@@ -1,12 +1,6 @@
 "use strict";
 
-import {
-  getAziende,
-  getAziendaUsaTech,
-  //getTecnologia,
-  //creaTable,
-  //toggle_table,
-} from "./myFunction.js";
+import { getAziende, getAziendaUsaTech, dominio } from "./myFunction.js";
 
 let toggle_table = true;
 
@@ -195,7 +189,8 @@ function createDivAddTech(id) {
 
 function eliminaTechAssociata(id_azienda, id_tecnologia) {
   fetch(
-    "http://localhost:3000/api/azienda2tech/deleteAssoc.php?id_azienda=" +
+    dominio +
+      "/api/azienda2tech/deleteAssoc.php?id_azienda=" +
       id_azienda +
       "&" +
       "id_tecnologia=" +
@@ -237,7 +232,7 @@ function creaTable(id) {
 
   const t_body = document.createElement("tbody");
 
-  fetch("http://localhost:3000/api/tecnologia/getTecnologie.php")
+  fetch(dominio + "/api/tecnologia/getTecnologie.php")
     .then((response) => response.json())
     .then((data) => {
       //console.log(data);
@@ -272,7 +267,7 @@ function creaTable(id) {
             e.target.dataset["id_tecnologia"],
             e.target.dataset["id_user"]
           );
-          fetch("http://localhost:3000/api/azienda2tech/postAzienda2tech.php", {
+          fetch(dominio + "/api/azienda2tech/postAzienda2tech.php", {
             method: "POST",
             body: JSON.stringify([
               e.target.dataset["id_azienda"],

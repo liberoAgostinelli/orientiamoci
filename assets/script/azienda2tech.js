@@ -114,7 +114,7 @@ async function createWrappTechAssoc(campi_azienda) {
   return wrap_tech_assoc;
 }
 
-async function createDivTech(campi_tech, campi_azienda) {
+async function createDivTech(campi_tech) {
   //console.log(campi_tech);
 
   const div_tech = document.createElement("div");
@@ -143,7 +143,7 @@ async function createDivTech(campi_tech, campi_azienda) {
       e.target.dataset["id_azienda"],
       e.target.dataset["id_tecnologia"]
     );
-    deleteTableAssoc(campi_tech.id_azienda, campi_azienda);
+    deleteTableAssoc(campi_tech.id_azienda);
     //console.log(wrap_azienda);
     //console.log(createWrappTechAssoc(campi_azienda));
   });
@@ -152,12 +152,23 @@ async function createDivTech(campi_tech, campi_azienda) {
   return div_tech;
 }
 
-async function deleteTableAssoc(campi_tech_id_azienda, campi_azienda) {
-  document.getElementById("div_tech_assoc_" + campi_tech_id_azienda).remove();
+async function deleteTableAssoc(id_azienda) {
+  //console.log(campi_tech);
+  document.getElementById("div_tech_assoc_" + id_azienda).remove();
   const wrap_tech_assoc = document.getElementById(
-    "wrap_tech_assoc_" + campi_tech_id_azienda
+    "wrap_tech_assoc_" + id_azienda
   );
-  wrap_tech_assoc.appendChild(await createWrappTechAssoc(campi_azienda));
+  const div_tech_assoc = document.createElement("div");
+  div_tech_assoc.classList.add("div_tech_assoc");
+  div_tech_assoc.classList.add("flex");
+  div_tech_assoc.setAttribute("id", "div_tech_assoc_" + id_azienda);
+
+  const dati = await getAziendaUsaTech(id_azienda);
+  console.log(dati);
+  for (let i = 0; i < dati.length; i++) {
+    div_tech_assoc.appendChild(await createDivTech(dati[i]));
+  }
+  wrap_tech_assoc.appendChild(div_tech_assoc);
 }
 
 /**
@@ -278,7 +289,7 @@ function creaTable(id) {
             .then((response) => response.json())
             .then((data) => {
               console.log(data);
-              //deleteTableAssoc(campi_tech.id_azienda, campi_azienda);
+              deleteTableAssoc(data[0]);
             });
         });
         const td_btn = document.createElement("td");

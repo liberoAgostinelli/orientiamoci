@@ -31,7 +31,7 @@ class Controller{
     }
 
     public function verificaUsername($username){
-        $query = "select id_user, username, password from Users where username = :user";
+        $query = "select id_user, username, password, data_nascita, numero_tel, nome, cognome, email, tipo from Users where username = :user";
         $params = [':user' => $username];
         return $this->crud->select($query, $params);
     }
